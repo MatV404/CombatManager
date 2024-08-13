@@ -1,0 +1,82 @@
+<Window x:Class="CombatManager.ExplorerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:CombatManager"
+        mc:Ignorable="d"
+        Title="ExplorerWindow" Height="450" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Border 
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            BorderBrush="Gray"
+            BorderThickness="1px"
+            Padding="4 0"
+            Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Width="30"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Name="PrevDirectoryButton"
+                        Click="PrevDirectoryButton_OnClick">⬅️</Button>
+                <TextBlock Grid.Column="1" 
+                           Grid.ColumnSpan="3"
+                           Name="CurrentPath"></TextBlock>
+                <TextBlock Grid.Column="4" HorizontalAlignment="Right">📁</TextBlock>
+            </Grid>
+        </Border>
+        
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            BorderBrush="Gray"
+            BorderThickness="1px"
+            Padding="4px"
+            Margin="5px">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="20px"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0"
+                            Name="ContentsPanel"
+                            Margin="2px">
+                    
+                </StackPanel>
+                
+                <ScrollBar Grid.Column="1"></ScrollBar>
+            </Grid>
+        </Border>
+        <Button Grid.Row="2"
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Margin="0 0 5 5"
+                Width="100"
+                Name="SaveButton"
+                Click="ChoseSaveDirectory">Save</Button>
+    </Grid>
+</Window>

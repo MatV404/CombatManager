@@ -1,0 +1,118 @@
+<Page x:Class="CombatManager.CreatureCreation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:CombatManager"
+      mc:Ignorable="d"
+      Title="Creature Creation" Height="450" Width="800">
+    <Grid Margin="5px 20px 5px 20px">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="20px" />
+            <RowDefinition Height="20px" />
+            <RowDefinition Height="40px" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">
+            <TextBlock Width="200">Creature Name</TextBlock>
+            <TextBox Name="Name" 
+                     Margin="0 0 0 10px" 
+                     Width="200"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Width="200">Creature Type</TextBlock>
+            <TextBox Width="200" 
+                     Name="Type"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock Width="200">Strength Modifier</TextBlock>
+            <TextBox Width="200" 
+                     Name="Strength"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"
+                     ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Width="200">Dexterity Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Dexterity"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Width="200">Constitution Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Constitution"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBlock Width="200">Intelligence Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Intelligence"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <TextBlock Width="200">Wisdom Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Wisdom"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="2">
+            <TextBlock Width="200">Charisma Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Charisma"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="5" Grid.Column="0">
+            <TextBlock Width="200">Initiative Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Initiative"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1">
+            <TextBlock Width="200">Perception Modifier</TextBlock>
+            <TextBox Width="200"
+                     Name="Perception"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="2">
+            <TextBlock Width="200">Armor</TextBlock>
+            <TextBox Width="200"
+                     Name="Armor"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="6" Grid.Column="0">
+            <TextBlock Width="200">Minimum HP Roll</TextBlock>
+            <TextBox Width="200"
+                     Name="MinHealthRoll"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="1">
+            <TextBlock Width="200">Maximum HP Roll</TextBlock>
+            <TextBox Width="200"
+                     Name="MaxHealthRoll"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="2">
+            <TextBlock Width="200">Average Maximum HP</TextBlock>
+            <TextBox Width="200"
+                     Name="MaxHealth"
+                     PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
+        </StackPanel>
+        <CheckBox Grid.Row="7" Grid.Column="1" Name="Generated" HorizontalAlignment="Center">Don't roll for health on load</CheckBox>
+        <Button Grid.Row="9" Grid.Column="1" Name="SaveButton" Click="SaveButton_OnClick">Save Creature</Button>
+    </Grid>
+</Page>

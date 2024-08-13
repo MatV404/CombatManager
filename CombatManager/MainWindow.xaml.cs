@@ -1,14 +1,7 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CombatManager.Util;
+﻿using System.Windows;
+using CombatManager.Combat;
+using CombatManager.Entity;
+using CombatManager.Json;
 
 namespace CombatManager;
 
@@ -20,5 +13,32 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    private void CreateCreatureButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var creationPage = new CreatureCreation(new JsonWriter<Creature>());
+
+        NavigationFrame.Content = creationPage;
+    }
+
+    private void StartCombatButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var managementPage = new CombatManagement(
+            new JsonReader<IEnumerable<Creature>>(),
+            new JsonReader<Creature>(),
+            new InitiativeTracker());
+
+        NavigationFrame.Content = managementPage;
+    }
+
+    private void CreateCombatButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var creationPage = new CombatCreation(
+            new JsonReader<Creature>(),
+            new JsonReader<IEnumerable<Creature>>(),
+            new JsonWriter<IEnumerable<Creature>>());
+
+        NavigationFrame.Content = creationPage;
     }
 }

@@ -5,7 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CombatManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="TTRPG Combat Manager Tool" Height="650" Width="850">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" 
+                Grid.Column="0" 
+                Margin="3px"
+                Name="StartCombatButton"
+                Click="StartCombatButton_OnClick">Start Combat</Button>
+        <Button Grid.Row="0" 
+                Grid.Column="1" 
+                Margin="3px"
+                Name="CreateCombatButton"
+                Click="CreateCombatButton_OnClick">Create Combat</Button>
+        <Button Grid.Row="0"
+                Grid.Column="2"
+                Margin="3px"
+                Name="CreateCreatureButton"
+                Click="CreateCreatureButton_OnClick">Create Creature</Button>
+        <Frame Name="NavigationFrame" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            
+        </Frame>
     </Grid>
 </Window>

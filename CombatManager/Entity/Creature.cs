@@ -11,7 +11,7 @@ public class Creature
     public List<Ability> Attacks { get; set; }
     public List<Ability> Features { get; set; }
     public List<Ability> Other { get; set; }
-    
+
     // Attribute that determines whether the stats for a given creature have already been generated or whether 
     // stuff such as health needs to be rolled for.
     public bool IsGenerated { get; set; }
@@ -19,7 +19,7 @@ public class Creature
     public void Initialize(Random generator)
     {
         Initiative = generator.Next(1, 21) + Stats.InitiativeModifier;
-        
+
         if (IsGenerated)
         {
             return;
