@@ -32,7 +32,11 @@
                 Margin="3px"
                 Name="CreateCreatureButton"
                 Click="CreateCreatureButton_OnClick">Create Creature</Button>
-        <Frame Name="NavigationFrame" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+        <Frame Name="NavigationFrame" 
+               Grid.Row="1" 
+               Grid.Column="0" 
+               Grid.ColumnSpan="3"
+               NavigationUIVisibility="Hidden">
             
         </Frame>
     </Grid>

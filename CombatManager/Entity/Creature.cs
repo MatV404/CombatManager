@@ -1,3 +1,4 @@
+using System.Resources;
 using System.Windows.Controls.Primitives;
 
 namespace CombatManager.Entity;
@@ -8,13 +9,13 @@ public class Creature
     public string Type { get; set; }
     public int Initiative { get; set; }
     public Statistics Stats { get; set; }
-    public List<Ability> Attacks { get; set; }
-    public List<Ability> Features { get; set; }
-    public List<Ability> Other { get; set; }
+    public List<Ability> Attacks { get; set; } = [];
+    public List<Ability> Features { get; set; } = [];
+    public List<Ability> Other { get; set; } = [];
 
     // Attribute that determines whether the stats for a given creature have already been generated or whether 
     // stuff such as health needs to be rolled for.
-    public bool IsGenerated { get; set; }
+    public bool IsGenerated { get; set; } = false;
 
     public void Initialize(Random generator)
     {
@@ -27,8 +28,6 @@ public class Creature
 
         Stats.CurrentMaxHealth = generator.Next(Stats.MinGeneratedHealth, Stats.MaxGeneratedHealth + 1);
         Stats.CurrentHealth = Stats.CurrentMaxHealth;
-
-        IsGenerated = true;
     }
 
     public void ChangeHealth(int changeValue)
@@ -43,5 +42,15 @@ public class Creature
         {
             Stats.CurrentHealth = Stats.CurrentMaxHealth;
         }
+    }
+
+    public void Reset()
+    {
+        Stats.CurrentHealth = Stats.CurrentMaxHealth;
+        if (IsGenerated)
+        {
+            return;
+        }
+        Initiative = 0;
     }
 }

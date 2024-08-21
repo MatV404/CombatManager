@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="420"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -35,7 +35,8 @@
                         Click="StartCombatButton_OnClick">Start Combat</Button>
                 <Button Width="120"
                         Margin="2 2 10 2"
-                        Name="ResetCombatButton">Reset Combat</Button>
+                        Name="ResetCombatButton"
+                        Click="ResetCombatButton_OnClick">Reset Combat</Button>
                 <!-- ToDo: This is not a very good way of doing this. FIX !-->
                 <TextBlock Width="365"></TextBlock>
                 <Button Width="20"
@@ -127,9 +128,12 @@
                 Grid.ColumnSpan="2"
                 BorderBrush="Gray"
                 BorderThickness="3 1 3 3">
-            <Frame Margin="3"
-                   Name="CreatureInfoFrame">
-            </Frame>
+            <ScrollViewer>
+                <Frame Margin="3"
+                       Name="CreatureInfoFrame"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
+            </ScrollViewer>
         </Border>
         <Border Grid.Row="2" 
                 Grid.Column="2" 
@@ -143,11 +147,9 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="18"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Row="0" 
-                        Grid.Column="0" 
-                        Grid.ColumnSpan="2"
+                        Grid.Column="0"
                         BorderBrush="Gray"
                         BorderThickness="1 1 1 3">
                     <TextBlock HorizontalAlignment="Center"
@@ -155,10 +157,11 @@
                                FontWeight="Bold">Creatures in Combat</TextBlock>
                 </Border>
                 
-                <StackPanel Grid.Row="1" Grid.Column="0" Margin="3"
-                            Name="ActiveCreaturePanel">
-                </StackPanel>
-                <ScrollBar Grid.Row="1" Grid.Column="1"></ScrollBar>
+                <ScrollViewer Grid.Row="1" Grid.Column="0">
+                    <StackPanel  Margin="3"
+                                Name="ActiveCreaturePanel">
+                    </StackPanel>
+                </ScrollViewer>
                 <Border Grid.Row="2" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="2"
@@ -168,11 +171,13 @@
                         <Button Margin=" 0  0"
                                 HorizontalAlignment="Center"
                                 Name="AddCreatureButton"
-                                Width="100">Add Creat.</Button>
+                                Width="100"
+                                Click="AddCreatureButton_OnClick">Add Creat.</Button>
                         <Button Margin=" 0  0"
                                 HorizontalAlignment="Center"
                                 Name="LoadCreatureButton"
-                                Width="100">Load Creat.</Button>
+                                Width="100"
+                                Click="LoadCreatureButton_OnClick">Load Creat.</Button>
                     </StackPanel>
                 </Border>
             </Grid>

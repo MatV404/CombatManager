@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CombatManager"
       mc:Ignorable="d"
-      Title="Creature Creation" Height="450" Width="800">
+      Title="Creature Creation" Height="600" Width="800">
     <Grid Margin="5px 20px 5px 20px">
         <Grid.RowDefinitions>
             <RowDefinition Height="40px" />
@@ -16,6 +16,9 @@
             <RowDefinition Height="40px" />
             <RowDefinition Height="40px" />
             <RowDefinition Height="20px" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30px" />
             <RowDefinition Height="20px" />
             <RowDefinition Height="40px" />
         </Grid.RowDefinitions>
@@ -113,6 +116,25 @@
                      PreviewTextInput="NumOnly_OnPreviewTextInput"></TextBox>
         </StackPanel>
         <CheckBox Grid.Row="7" Grid.Column="1" Name="Generated" HorizontalAlignment="Center">Don't roll for health on load</CheckBox>
-        <Button Grid.Row="9" Grid.Column="1" Name="SaveButton" Click="SaveButton_OnClick">Save Creature</Button>
+        
+        <Border Grid.Row="8" 
+                Grid.Column="0" 
+                Grid.RowSpan="2" 
+                Grid.ColumnSpan="3"
+                BorderBrush="Gray"
+                BorderThickness="2">
+            <ScrollViewer>
+                <StackPanel Margin="5"
+                            Name="AbilitiesPanel">
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Button Grid.Row="10"
+                Grid.Column="1"
+                Margin="2"
+                Width="100"
+                Name="AddAbilityButton"
+                Click="AddAbilityButton_OnClick">Add Ability</Button>
+        <Button Grid.Row="12" Grid.Column="1" Name="SaveButton" Click="SaveButton_OnClick">Save Creature</Button>
     </Grid>
 </Page>

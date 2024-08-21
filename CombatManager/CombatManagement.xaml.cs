@@ -50,6 +50,26 @@ public partial class CombatManagement : Page
         RefreshCreatures();
     }
 
+    private void PreviewCreature(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button)
+        {
+            MessageBox.Show("Unable to preview creature.");
+            return;
+        }
+
+        var tag = button.Tag;
+        if (tag is not int index)
+        {
+            MessageBox.Show("Unable to preview creature.");
+            return;
+        }
+
+        var creature = _creatures[index];
+        var creatureInfoPage = new CreatureInfo(creature);
+        CreatureInfoFrame.Content = creatureInfoPage;
+    }
+    
     // ToDo: Create an event instead that reacts only by touching the affected creature entry.
     private void RefreshCreatures()
     {
@@ -95,6 +115,16 @@ public partial class CombatManagement : Page
         };
         button.Click += RemoveCreature;
         panel.Children.Add(button);
+
+        var previewButton = new Button
+        {
+            Tag = idxTag,
+            Content = "\ud83d\udc41\ufe0f",
+            Width = 20,
+            HorizontalAlignment = HorizontalAlignment.Right
+        };
+        previewButton.Click += PreviewCreature;
+        panel.Children.Add(previewButton);
         
         var text = new TextBlock
         {
@@ -146,13 +176,13 @@ public partial class CombatManagement : Page
             MessageBox.Show("Generator is null!");
             return;
         }
-        foreach (var item in _creatures)
+        foreach (var item in _creatures.Where(item => !item.Data.IsGenerated))
         {
             item.Data.Initialize(_generator);
         }
         
         _initiative.Initialize();
-        _creatures = _creatures.OrderBy(i => i.Data.Initiative).ToList();
+        _creatures = _creatures.OrderByDescending(i => i.Data.Initiative).ToList();
         RefreshCreatures();
     }
 
@@ -189,5 +219,71 @@ public partial class CombatManagement : Page
         }
         _initiative.Decrement(_creatures.Count);
         UpdateTurnMarkers();
+    }
+
+    private void AddQuickCreature(object? sender, Creature creature)
+    {
+        var creatureInstance = new CreatureInstance(
+            $"{_creatures.Count}. {creature.Name}",
+            _creatures.Count, creature);
+        _creatures.Add(creatureInstance);
+        _creatures = _creatures.OrderByDescending(i => i.Data.Initiative).ToList();
+        RefreshCreatures();
+    }
+    
+    private void AddCreatureButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = new QuickCreatureAdd();
+        window.QuickCreatureAdded += AddQuickCreature;
+        window.ShowDialog();
+    }
+
+    private async void LoadCreature(object? sender, string path)
+    {
+        Creature? creature;
+        try
+        {
+            creature = await _creatureReader.ReadAsync(path);
+        }
+        catch (Exception)
+        {
+            creature = null;
+        }
+
+        if (creature is null)
+        {
+            MessageBox.Show("Unable to load chosen creature.");
+            return;
+        }
+
+        if (!creature.IsGenerated && _initiative.IsActive)
+        {
+            if (_generator is null)
+            {
+                MessageBox.Show("Unable to determine initiative for creature. Try restarting combat and loading again.");
+                return;
+            }
+            creature.Initialize(_generator);
+        }
+        var instance = new CreatureInstance($"{_creatures.Count}. {creature.Name}", 
+            _creatures.Count, creature);
+        _creatures.Add(instance);
+        _creatures = _creatures.OrderByDescending(i => i.Data.Initiative).ToList();
+        RefreshCreatures();
+    }
+
+    private void LoadCreatureButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var window = new ExplorerWindow(new JsonExplorer(), ExplorerMode.READ, Paths.CreatureDirName);
+        window.TargetChosen += LoadCreature;
+        window.ShowDialog();
+    }
+
+    private void ResetCombatButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        foreach (var creature in _creatures)
+        {
+            creature.Data.Reset();
+        }
     }
 }
